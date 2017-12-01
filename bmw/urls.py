@@ -13,9 +13,30 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from views import json_locations, MeetlocatieListView, MeetlocatieDetailView
+from django.conf.urls.static import static
+from bmw.views import ProjectlocatieListView
 
 urlpatterns = [
+    url(r'^$', MeetlocatieListView.as_view(), name='home'),
+    #url(r'^ploc/(?P<pk>\d+)$', MeetlocatieListView.as_view(), name='location-list'),
+    url(r'^mloc/(?P<pk>\d+)$', MeetlocatieDetailView.as_view(), name='location-detail'),
+    url(r'^locs/', json_locations),
+    url(r'^data/', include('acacia.data.urls',namespace='acacia')),
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),    
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+admin.site.site_header = 'Boeren Meten Water'
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

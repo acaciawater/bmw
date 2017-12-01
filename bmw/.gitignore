@@ -1,0 +1,8 @@
+secrets.py
+media/
+logs/
+acacia
+*.py~
+*.pyc
+
+

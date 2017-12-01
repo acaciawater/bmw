@@ -3,6 +3,7 @@
 	<name>bmw</name>
 	<comment></comment>
 	<projects>
+		<project>acacia</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

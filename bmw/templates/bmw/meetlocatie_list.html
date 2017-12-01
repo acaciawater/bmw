@@ -1,0 +1,15 @@
+{% extends 'base_list.html' %}
+{% block list %}
+<div id="list" class="list-group scroll col-sm-3">
+<a href="{%url 'home' %}" class="list-group-item active">Meetlocaties<span id="badge" title="Aantal locaties" class="badge">{{object_list.count}}</a>
+{% for obj in object_list %}
+<a 
+	onmouseover="showMarker({{obj.id}});" 
+	onmouseout="hideMarker({{obj.id}});" 
+	href="{% url 'location-detail' obj.id %}" 
+	class="list-group-item" >
+	<span><img class="bullet" src='/static/bullet_ball_blue.png'></img>{{obj}}</span>
+</a>
+{% endfor %}
+</div>
+{% endblock list %}
