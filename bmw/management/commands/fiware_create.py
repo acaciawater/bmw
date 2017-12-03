@@ -29,9 +29,14 @@ class Command(BaseCommand):
                 dest = 'url',
                 default = settings.ORION_URL,
                 help = 'url of context broker')
+        parser.add_argument('-f','--force',
+                action='store_true',
+                dest = 'force',
+                default = False,
+                help = 'force replacement of existing entities')
 
     def handle(self, *args, **options):
-        pk = options.get('pk',None)
+        pk = options.get('pk')
         if pk:
             query = MeetLocatie.objects.filter(pk=pk)
         else:
@@ -39,7 +44,7 @@ class Command(BaseCommand):
         url = options.get('url')
         orion = Orion(url)
         for loc in query:
-            logger.info('Creating '+loc.name)
+            logger.info('Fiware-orion creating entity '+loc.name)
             entity = slugify(loc.name)
             data = {
                 'id': entity,
@@ -59,11 +64,11 @@ class Command(BaseCommand):
 
             data['latitude'] = {
                 'value': pos.y,
-                'type': 'Float'
+                'type': 'Number'
             }
             data['longitude'] = {
                 'value': pos.x,
-                'type': 'Float'
+                'type': 'Number'
             }
 
             for series in loc.series_set.all():
@@ -91,12 +96,13 @@ class Command(BaseCommand):
             response = orion.create_entity(data)
             if not response.ok:
                 if response.status_code == 422:
-                    logger.warning('Entity {} already exists. Replacing..'.format(entity))
-                    #Already exist. delete and try again (put is not allowed)
-                    orion.delete_entity(entity)
-                    response = orion.create_entity(data)
-                try:
-                    response.raise_for_status()
-                except Exception as e:
-                    logger.error(e)
-                    
+                    logger.warning('Entity {} already exists'.format(entity))
+                    if options.get('force') == True:
+                        logger.info('Replacing entity {} ...'.format(entity))
+                        #Already exist. delete and try again (http verb PUT is not allowed)
+                        orion.delete_entity(entity)
+                        response = orion.create_entity(data)
+                        try:
+                            response.raise_for_status()
+                        except Exception as e:
+                            logger.error(e)
