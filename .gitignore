@@ -104,4 +104,5 @@ env/
 .settings/
 media/
 acacia
+logs/
 
