@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--  	<link href="{% static "img/favicon.ico" %}" rel="icon" type="image/x-ico" /> -->
+ 	<link href="{% static "favicon.ico" %}" rel="icon" type="image/x-ico" />
 	<title>{% block title %}{{object.name}}{% endblock %}</title>
 	{% block script %}
 	<script src="//code.jquery.com/jquery-3.2.1.min.js"
@@ -62,14 +62,15 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-		  {% block brandname %}<div class="navbar-brand">
-		  <a href="http://www.ltonoord.nl"><img src="/static/logo.svg"/></a> 
-		  <a href="https://www.noorderzijlvest.nl/"><img src="/static/logo_waterschap_noorderzijlvest_1200.png"/></a> 		  
-		  <a href="https://www.wetterskipfryslan.nl/"><img src="/static/wetterskiplogo.png"/></a> 
-		  <a href="http://www.fiware.org"><img src="/static/fiware.png"/></a> 
-		  
-<!-- 		  <a href="http://www.future-city.nl"><img src="/static/logo-future-city-foundation.png"/></a>  -->
-		  Boeren meten Water</div>{% endblock %}
+		  {% block brandname %}
+		  <div class="navbar-brand">
+			  <a href="http://www.ltonoord.nl"><img src="/static/logo.svg"/></a> 
+			  <a href="https://www.noorderzijlvest.nl/"><img src="/static/logo_waterschap_noorderzijlvest_1200.png"/></a> 		  
+			  <a href="https://www.wetterskipfryslan.nl/"><img src="/static/wetterskiplogo.png"/></a> 
+			  <a href="http://www.fiware.org"><img src="/static/fiware.png"/></a> 
+<!-- 			  Boeren meten Water -->
+		  </div>
+		  {% endblock %}
 	    </div>
 	    {% endblock navbar-header %}
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
