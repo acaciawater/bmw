@@ -9,7 +9,7 @@ from django.views.generic.list import ListView
 from django.conf import settings
 
 import logging
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -56,17 +56,9 @@ class ProjectlocatieListView(LocationListView):
 class MeetlocatieListView(LocationListView):
     model = MeetLocatie
     template_name = 'bmw/meetlocatie_list.html'
-    
-#     def get_parent(self):
-#         pk = self.kwargs.get('pk')
-#         return get_object_or_404(ProjectLocatie,pk=pk)
-#         
-#     def get_queryset(self):
-#         return self.get_parent().meetlocatie_set.all()
-    
+        
     def get_context_data(self, **kwargs):
-        context = LocationListView.get_context_data(self, **kwargs)
-#        context['parent'] = self.get_parent() 
+        context = LocationListView.get_context_data(self, **kwargs) 
         return context
     
 class MeetlocatieDetailView(DetailView):
