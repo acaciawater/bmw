@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Boeren meten Water{% endblock %}
+{% block style %}
+{{ block.super }}
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/static/css/mapstor.css"/>
+<style>
+iframe {
+	height: 100%;
+	width: 100%;
+	display: block;
+}
+</style>
+{% endblock %}
+{% block script %}
+{{ block.super }}
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+{% endblock %}
+{% block content %}
+<div class="full adjust container-fluid">
+<div class="full row row-fluid">
+<div id="map" class="full col-sm-9">
+<iframe src="http://fiware.acaciadata.com/stefan/BMWKaart?mode=embedded&theme=wirecloud.defaulttheme" frameborder="0" allowfullscreen></iframe>
+</div>
+{% block list %}
+<div id="list" class="list-group scroll col-sm-3"></div>
+{% endblock list %}
+</div>
+</div>
+{% endblock %}

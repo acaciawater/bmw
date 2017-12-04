@@ -18,11 +18,9 @@ from django.contrib import admin
 from django.conf import settings
 from views import json_locations, MeetlocatieListView, MeetlocatieDetailView
 from django.conf.urls.static import static
-from bmw.views import ProjectlocatieListView
 
 urlpatterns = [
     url(r'^$', MeetlocatieListView.as_view(), name='home'),
-    #url(r'^ploc/(?P<pk>\d+)$', MeetlocatieListView.as_view(), name='location-list'),
     url(r'^mloc/(?P<pk>\d+)$', MeetlocatieDetailView.as_view(), name='location-detail'),
     url(r'^locs/', json_locations),
     url(r'^data/', include('acacia.data.urls',namespace='acacia')),

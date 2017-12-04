@@ -55,7 +55,8 @@ class ProjectlocatieListView(LocationListView):
     
 class MeetlocatieListView(LocationListView):
     model = MeetLocatie
-    template_name = 'bmw/meetlocatie_list.html'
+    #template_name = 'bmw/meetlocatie_list.html'
+    template_name = 'fiware/meetlocatie_list.html'
         
     def get_context_data(self, **kwargs):
         context = LocationListView.get_context_data(self, **kwargs) 
@@ -63,7 +64,8 @@ class MeetlocatieListView(LocationListView):
     
 class MeetlocatieDetailView(DetailView):
     model = MeetLocatie
-    template_name = 'bmw/meetlocatie_detail.html'
+    #template_name = 'bmw/meetlocatie_detail.html'
+    template_name = 'fiware/meetlocatie_detail.html'
     
     def get_context_data(self, **kwargs):
         context = super(MeetlocatieDetailView, self).get_context_data(**kwargs)
@@ -75,5 +77,3 @@ class MeetlocatieDetailView(DetailView):
             'center': [pos.y, pos.x],
             'zoom': 16 }
         return context
-
-    
