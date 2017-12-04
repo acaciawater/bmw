@@ -39,7 +39,7 @@ class Command(BaseCommand):
         url = options.get('url')
         orion = Orion(url)
         for loc in query:
-            logger.info('Updating '+loc.name)
+            logger.info('Fiware-orion updating entity '+loc.name)
             entity = slugify(loc.name)
             
             data = {}
@@ -61,6 +61,7 @@ class Command(BaseCommand):
                             }
                         }
                     }
+                    logger.info('  {attr}={value}'.fomrat(attr=attr,value=last.value))
             try:
                 response = orion.update(entity, data)
                 response.raise_for_status()

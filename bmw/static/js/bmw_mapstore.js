@@ -258,15 +258,7 @@ function initMap(div,options) {
 		format: 'image/png',
 		opacity: 0.4
 	});
-					
-	var ontwatering= L.tileLayer.wms('http://maps.acaciadata.com/geoserver/Leiden/wms', {
-		layers: 'Leiden:ontwatering-wgs84',
-		format: 'image/png',
-		transparent: true,
-		//propertyName: 'perc_ont',
-		opacity: 0.5
-	});
-	
+						
 	var map = L.map(div,options);
 
  	baseMaps = {'Openstreetmap': osm, 'Google roads': roads, 'Google satellite': satellite, 'ESRI topo': topo, 'ESRI imagery': imagery};
