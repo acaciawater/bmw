@@ -61,7 +61,7 @@ class Command(BaseCommand):
                             }
                         }
                     }
-                    logger.info('  {attr}={value}'.fomrat(attr=attr,value=last.value))
+                    logger.info('  {attr}={value}'.format(attr=attr,value=last.value))
             try:
                 response = orion.update(entity, data)
                 response.raise_for_status()
