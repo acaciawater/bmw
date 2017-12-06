@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.conf import settings
 from views import json_locations, MeetlocatieListView, MeetlocatieDetailView
 from django.conf.urls.static import static
+from bmw.views import json_series
 
 urlpatterns = [
     url(r'^$', MeetlocatieListView.as_view(), name='home'),
     url(r'^mloc/(?P<pk>\d+)$', MeetlocatieDetailView.as_view(), name='location-detail'),
     url(r'^locs/', json_locations),
+    url(r'^series/(?P<pk>\d+)$', json_series, name='ckan-series'),
     url(r'^data/', include('acacia.data.urls',namespace='acacia')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.hmac.urls')),    

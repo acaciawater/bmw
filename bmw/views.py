@@ -9,12 +9,13 @@ from django.views.generic.list import ListView
 from django.conf import settings
 
 import logging
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from acacia.data.models import MeetLocatie, ProjectLocatie
+from acacia.data.models import MeetLocatie, ProjectLocatie, Series
 from django.views.generic.detail import DetailView
+from tastypie.http import HttpBadRequest
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +37,19 @@ def json_locations(request):
         if loc:
             result.append({'id': p.pk, 'name': p.name, 'lon': loc.x, 'lat': loc.y})
     return JsonResponse(result,safe=False)
-            
+
+def json_series(request,pk):
+    """ return json response with timeseries from ckan """
+    from bmw.ckan import ckan_id, ckan_to_series
+
+    series = get_object_or_404(Series,pk=pk)
+
+    resid = ckan_id[series.mlocatie.name.lower()]
+    data = ckan_to_series(resid, series.name)
+    
+    return JsonResponse(data,safe=False)
+
+    
 class LocationListView(ListView):
     template_name = 'bmw/location_list.html'
     
